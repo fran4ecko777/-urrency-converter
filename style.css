@@ -54,14 +54,17 @@ h1 {
 .main-axis {
     margin: 0 auto;
     max-width: 640px;
-    display: flex;
-    justify-content: space-between;
     width: 100%;
 }
 
 .box {
     width: 100%;
     max-width: 260px;
+}
+
+.menu-box {
+    display: flex;
+    justify-content: space-around;
 }
 
 .input-head {
