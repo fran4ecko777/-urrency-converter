@@ -87,7 +87,12 @@ h1 {
     flex-grow: 1;
 }
 
-.selected {
+.buy_selected {
+    color: white;
+    background: #833AE0;
+}
+
+.sale_selected {
     color: white;
     background: #833AE0;
 }
