@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 
-* {
+body {
     margin: 0;
     padding: 0;
 }
 
 /* Начало шапки сайта */
 
-a {
+.pages-info {
     font-family: Roboto;
     margin-right: 10px;
     font-size: 11px;
@@ -22,17 +22,9 @@ header {
     background: #F5F5F6;
 }
 
-.logo {
-
-}
-
 .pages {
     display: flex;
     justify-content: space-around;
-}
-
-.login {
-
 }
 
 .wrapper-header {
@@ -41,11 +33,12 @@ header {
     max-width: 950px;
     justify-content: space-between;
     align-items: center;
+    padding: 5px;
 }
 
 .login-button {
     font-family: Roboto;
-    font-size: 18px;
+    font-size: 13px;
     font-weight: bold;
     border: none;
     border-radius: 4px;
@@ -59,7 +52,6 @@ h1 {
     font-size: 40px;
     margin-left: 23%;
     margin-top: 5%;
-
 }
 
 .main-axis {
@@ -72,8 +64,6 @@ h1 {
 
 .box {
     width: 40%;
-    padding-top: 50px;
-    
 }
 
 .input-head {
@@ -84,18 +74,16 @@ h1 {
 .choose {
     display: flex;
     justify-content: space-evenly;
-    border: 1px solid #E5E5E5;
+    /* border: 1px solid #E5E5E5; */
     border-radius: 3px;
     width: 100%;
     height: 35px;
-    margin: 5px 0 20px 0;
-     
+    margin: 5px 0 20px 0; 
 }
 
 .input-click {
-    width: 20%;
     border: 1px solid #E5E5E5;
-    
+    flex-grow: 1;
 }
 
 .selected {
@@ -130,6 +118,5 @@ input {
     display: flex;
     color: #C6C6C6;
     margin-top: 20px;
-    margin-left: 10px;
 }
 
