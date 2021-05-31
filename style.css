@@ -82,7 +82,7 @@ h1 {
     margin: 5px 0 20px 0; 
 }
 
-.input-click {
+.sale-button, .buy-button {
     border: 1px solid #E5E5E5;
     flex-grow: 1;
 }
@@ -95,11 +95,6 @@ h1 {
 .sale_selected {
     color: white;
     background: #833AE0;
-}
-
-.unselected {
-    color: #C6C6C6;
-    background-color: white;
 }
 
 .input-zone {
@@ -119,7 +114,7 @@ input {
     margin-top: 10px;
 }
 
-.input-info {
+.sale-info, .buy-info {
     font-size: 15px;
     display: flex;
     color: #C6C6C6;
