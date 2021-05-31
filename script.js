@@ -28,7 +28,7 @@ class Converter  {
                 this.saleSelected.classList.remove('sale_selected');
                 this.saleSelected = event.target;
                 this.saleSelected.classList.add('sale_selected');
-                this.getDataFromHost(this.base)
+                this.base = ''
             })
         });
         currencToBuy.forEach((element) => {
@@ -36,7 +36,7 @@ class Converter  {
                 this.buySelected.classList.remove('buy_selected');
                 this.buySelected = event.target;
                 this.buySelected.classList.add('buy_selected');
-                this.getDataFromHost(this.symbol)
+                this.symbol = ''
             })
         });
     }
@@ -58,7 +58,13 @@ class Converter  {
 
     // Вывод информации на экран
     render () {
-        
+        let leftinput = document.querySelector('#leftinput')
+        let rightinput = document.querySelector('#leftinput')
+        // console.log(leftinput)
+        // console.log(rightinput)
+        element.addEventListener('input', () => {
+            rightinput.value = (parseFloat(leftinput.value) * this.this.toSymbol).toFixed(2)
+        })
     }
 
     // Метод выводит информацию на экран 
