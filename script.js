@@ -1,7 +1,7 @@
 class Converter  {
     constructor() {
         this.url = 'http://api.exchangeratesapi.io/v1/latest?';
-        this.apiKey = '8a401c8e0e05334c32dbec5930a63d9d';
+        this.apiKey = '27ccbd923747485232da8b614ba2c25f';
         // this.left = document.querySelector('.value');
         // this.right = document.querySelector('.right')
         this.saleSelected = document.querySelector('.sale_selected');
@@ -15,20 +15,18 @@ class Converter  {
         //  this.toSale = 0;
     }
 
-    // Получаем данные о текущих выбраных валютах
-
-    getCurrencyNames () {
+    setEventListenersForButtons() {
         let currencToSale = document.querySelectorAll('.sale-button')
         let currencToBuy = document.querySelectorAll('.buy-button')
-        this.base = this.saleSelected.innerHTML
-        this.symbol = this.buySelected.innerHTML
-
         currencToSale.forEach((element) => {
             element.addEventListener('click', (event) => {
                 this.saleSelected.classList.remove('sale_selected');
                 this.saleSelected = event.target;
                 this.saleSelected.classList.add('sale_selected');
-                this.base = ''
+                
+                // 1. getCurrencyNames() 
+
+                // 2. getDataFromHost()
             })
         });
         currencToBuy.forEach((element) => {
@@ -36,9 +34,15 @@ class Converter  {
                 this.buySelected.classList.remove('buy_selected');
                 this.buySelected = event.target;
                 this.buySelected.classList.add('buy_selected');
-                this.symbol = ''
+                
             })
         });
+    }
+
+    // Получаем данные о текущих выбраных валютах
+    getCurrencyNames () {
+        this.base = this.saleSelected.getAttribute('data-currency');
+        this.symbol = this.buySelected.getAttribute('data-currency');
     }
 
     //  Получить ответ и вернуть его
@@ -48,30 +52,28 @@ class Converter  {
             .then( data => {
                 this.toSymbol = data.rates[this.symbol]; 
                 console.log(this.toSymbol)
+                this.render();
             })
             .catch(error => {
                 console.log(error)
             }) 
-        
-        // this.data = '';
     }
 
     // Вывод информации на экран
     render () {
         let leftinput = document.querySelector('#leftinput')
-        let rightinput = document.querySelector('#leftinput')
+        let rightinput = document.querySelector('#rightinput')
         // console.log(leftinput)
         // console.log(rightinput)
-        element.addEventListener('input', () => {
-            rightinput.value = (parseFloat(leftinput.value) * this.this.toSymbol).toFixed(2)
-        })
+        rightinput.value = (parseFloat(leftinput.value) * this.toSymbol).toFixed(2)
+
     }
 
     // Метод выводит информацию на экран 
     init () {
+        this.setEventListenersForButtons();
         this.getCurrencyNames();
         this.getDataFromHost();
-        this.render();
     }
 }
 
