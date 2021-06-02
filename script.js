@@ -11,8 +11,6 @@ class Converter  {
         this.saleInfo = document.querySelector('.sale-info');
         this.buyInfo = document.querySelector('.buy-info');
         this.data = '';
-        //  this.toBase = 0;
-        //  this.toSale = 0;
     }
 
     setEventListenersForButtons() {
@@ -24,9 +22,8 @@ class Converter  {
                 this.saleSelected = event.target;
                 this.saleSelected.classList.add('sale_selected');
                 
-                // 1. getCurrencyNames() 
-
-                // 2. getDataFromHost()
+                this.getCurrencyNames() 
+                this.getDataFromHost()
             })
         });
         currencToBuy.forEach((element) => {
@@ -34,6 +31,9 @@ class Converter  {
                 this.buySelected.classList.remove('buy_selected');
                 this.buySelected = event.target;
                 this.buySelected.classList.add('buy_selected');
+
+                this.getCurrencyNames() 
+                this.getDataFromHost()
                 
             })
         });
@@ -45,27 +45,44 @@ class Converter  {
         this.symbol = this.buySelected.getAttribute('data-currency');
     }
 
+    // Обработчик событий при вводе суммы
+    // getInput () {
+    //     this.valueCurrensyToSale.addEventListener('input', () => {
+    //         
+    //     }) 
+    // }
+
     //  Получить ответ и вернуть его
     getDataFromHost () {
+        
         fetch(this.url+`access_key=${this.apiKey}&base=${this.base}&symbols=${this.symbol}`)
             .then(response => response.json())
             .then( data => {
-                this.toSymbol = data.rates[this.symbol]; 
-                console.log(this.toSymbol)
+                this.toSale = data.rates[this.symbol]; 
+                this.toBuy = 1 / this.toSale
+                console.log(this.toSale)
+                console.log(this.toBuy)
                 this.render();
             })
             .catch(error => {
                 console.log(error)
             }) 
     }
+    
+    // Вывод информации курса на страницу
+    getInfo () {
+        // this.saleInfo.textContent = `1 ${this.saleSelected.textContent} = ${this.toSale} ${this.buySelected.textContent}`;
+        // this.buyInfo.textContent = `1 ${this.symbol.textContent} = ${this.toBuy} ${this.saleSelected.textContent}`;
+        this.getCurrencyNames();
+        console.log(this.base.textContent)
+        console.log(this.symbol.textContent)
+    }
 
     // Вывод информации на экран
     render () {
         let leftinput = document.querySelector('#leftinput')
         let rightinput = document.querySelector('#rightinput')
-        // console.log(leftinput)
-        // console.log(rightinput)
-        rightinput.value = (parseFloat(leftinput.value) * this.toSymbol).toFixed(2)
+        rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
 
     }
 
@@ -74,6 +91,7 @@ class Converter  {
         this.setEventListenersForButtons();
         this.getCurrencyNames();
         this.getDataFromHost();
+        this.getInfo ();
     }
 }
 

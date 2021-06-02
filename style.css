@@ -64,7 +64,7 @@ h1 {
 
 .menu-box {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .input-head {
