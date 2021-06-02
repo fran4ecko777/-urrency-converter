@@ -51,6 +51,7 @@ class Converter  {
         this.valueCurrensyToBuy.addEventListener('input', () => {
             this.valueCurrensyToBuy.value
             this.getDataFromHost();
+            
         })
         // 3. При срабатывании создаем запрос на сервер, получаем ответ и рендерим информацию
         
@@ -93,9 +94,7 @@ class Converter  {
         let leftinput = document.querySelector('#leftinput')
         let rightinput = document.querySelector('#rightinput')
         // rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
-        let inputSaleBuy = true;
-        inputSaleBuy = this.isSale ? true : false;
-        if (inputSaleBuy) {
+        if (this.valueCurrensyToSale.value > this.valueCurrensyToBuy.value ) {
             rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
         } else {
             leftinput.value =(parseFloat(rightinput.value) / this.toSale).toFixed(2)
