@@ -39,18 +39,21 @@ class Converter  {
         });
     }
 
+    setEventListenersForInputs() {
+        // 1. Ищем инпуты 
+        
+        // 2. Добавляем на них обработчики события 'input'
+
+        // 3. При срабатывании создаем запрос на сервер, получаем ответ и рендерим информацию
+        
+
+    }
+
     // Получаем данные о текущих выбраных валютах
     getCurrencyNames () {
         this.base = this.saleSelected.getAttribute('data-currency');
         this.symbol = this.buySelected.getAttribute('data-currency');
     }
-
-    // Обработчик событий при вводе суммы
-    // getInput () {
-    //     this.valueCurrensyToSale.addEventListener('input', () => {
-    //         
-    //     }) 
-    // }
 
     //  Получить ответ и вернуть его
     getDataFromHost () {
@@ -70,16 +73,17 @@ class Converter  {
     }
     
     // Вывод информации курса на страницу
-    getInfo () {
-        // this.saleInfo.textContent = `1 ${this.saleSelected.textContent} = ${this.toSale} ${this.buySelected.textContent}`;
-        // this.buyInfo.textContent = `1 ${this.symbol.textContent} = ${this.toBuy} ${this.saleSelected.textContent}`;
-        this.getCurrencyNames();
-        console.log(this.base.textContent)
-        console.log(this.symbol.textContent)
+    renderRatesInfo () {
+        this.saleInfo.textContent = `1 ${this.saleSelected.textContent} = ${this.toSale} ${this.buySelected.textContent}`;
+        this.buyInfo.textContent = `1 ${this.buySelected.textContent} = ${this.toBuy} ${this.saleSelected.textContent}`;
+        // this.getCurrencyNames();
+        // console.log(this.base)
+        // console.log(this.symbol)
     }
 
     // Вывод информации на экран
     render () {
+        this.renderRatesInfo();
         let leftinput = document.querySelector('#leftinput')
         let rightinput = document.querySelector('#rightinput')
         rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
@@ -91,7 +95,7 @@ class Converter  {
         this.setEventListenersForButtons();
         this.getCurrencyNames();
         this.getDataFromHost();
-        this.getInfo ();
+        
     }
 }
 
