@@ -2,8 +2,6 @@ class Converter  {
     constructor() {
         this.url = 'http://api.exchangeratesapi.io/v1/latest?';
         this.apiKey = '27ccbd923747485232da8b614ba2c25f';
-        // this.left = document.querySelector('.value');
-        // this.right = document.querySelector('.right')
         this.saleSelected = document.querySelector('.sale_selected');
         this.buySelected = document.querySelector('.buy_selected')
         this.valueCurrensyToSale = document.querySelector('[name="sale"]');
@@ -41,9 +39,21 @@ class Converter  {
 
     setEventListenersForInputs() {
         // 1. Ищем инпуты 
-        
+        this.valueCurrensyToSale = document.querySelector('[name="sale"]');
+        this.valueCurrensyToBuy = document.querySelector('[name="buy"]');
         // 2. Добавляем на них обработчики события 'input'
+        this.valueCurrensyToSale.addEventListener('input', () => {
+            this.valueCurrensyToSale.value
+            this.getDataFromHost();
+            
+        })
 
+        // this.valueCurrensyToBuy.addEventListener('input', () => {
+        //     this.valueCurrensyToBuy.value
+        //     this.getCurrencyNames();
+        //     this.getDataFromHost();
+        //     this.setEventListenersForInputs()
+        // })
         // 3. При срабатывании создаем запрос на сервер, получаем ответ и рендерим информацию
         
 
@@ -76,9 +86,7 @@ class Converter  {
     renderRatesInfo () {
         this.saleInfo.textContent = `1 ${this.saleSelected.textContent} = ${this.toSale} ${this.buySelected.textContent}`;
         this.buyInfo.textContent = `1 ${this.buySelected.textContent} = ${this.toBuy} ${this.saleSelected.textContent}`;
-        // this.getCurrencyNames();
-        // console.log(this.base)
-        // console.log(this.symbol)
+        
     }
 
     // Вывод информации на экран
@@ -95,7 +103,7 @@ class Converter  {
         this.setEventListenersForButtons();
         this.getCurrencyNames();
         this.getDataFromHost();
-        
+        this.setEventListenersForInputs()
     }
 }
 
