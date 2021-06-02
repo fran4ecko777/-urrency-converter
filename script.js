@@ -8,7 +8,7 @@ class Converter  {
         this.valueCurrensyToBuy = document.querySelector('[name="buy"]');
         this.saleInfo = document.querySelector('.sale-info');
         this.buyInfo = document.querySelector('.buy-info');
-        this.data = '';
+        
     }
 
     setEventListenersForButtons() {
@@ -48,12 +48,10 @@ class Converter  {
             
         })
 
-        // this.valueCurrensyToBuy.addEventListener('input', () => {
-        //     this.valueCurrensyToBuy.value
-        //     this.getCurrencyNames();
-        //     this.getDataFromHost();
-        //     this.setEventListenersForInputs()
-        // })
+        this.valueCurrensyToBuy.addEventListener('input', () => {
+            this.valueCurrensyToBuy.value
+            this.getDataFromHost();
+        })
         // 3. При срабатывании создаем запрос на сервер, получаем ответ и рендерим информацию
         
 
@@ -94,7 +92,14 @@ class Converter  {
         this.renderRatesInfo();
         let leftinput = document.querySelector('#leftinput')
         let rightinput = document.querySelector('#rightinput')
-        rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
+        // rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
+        let inputSaleBuy = true;
+        inputSaleBuy = this.isSale ? true : false;
+        if (inputSaleBuy) {
+            rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
+        } else {
+            leftinput.value =(parseFloat(rightinput.value) / this.toSale).toFixed(2)
+        }
 
     }
 
