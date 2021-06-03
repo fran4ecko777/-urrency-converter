@@ -1,14 +1,13 @@
 class Converter  {
     constructor() {
         this.url = 'http://api.exchangeratesapi.io/v1/latest?';
-        this.apiKey = '27ccbd923747485232da8b614ba2c25f';
+        this.apiKey = '8a401c8e0e05334c32dbec5930a63d9d';
         this.saleSelected = document.querySelector('.sale_selected');
         this.buySelected = document.querySelector('.buy_selected')
         this.valueCurrensyToSale = document.querySelector('[name="sale"]');
         this.valueCurrensyToBuy = document.querySelector('[name="buy"]');
         this.saleInfo = document.querySelector('.sale-info');
         this.buyInfo = document.querySelector('.buy-info');
-        
     }
 
     setEventListenersForButtons() {
@@ -19,7 +18,6 @@ class Converter  {
                 this.saleSelected.classList.remove('sale_selected');
                 this.saleSelected = event.target;
                 this.saleSelected.classList.add('sale_selected');
-                
                 this.getCurrencyNames() 
                 this.getDataFromHost()
             })
@@ -29,11 +27,9 @@ class Converter  {
                 this.buySelected.classList.remove('buy_selected');
                 this.buySelected = event.target;
                 this.buySelected.classList.add('buy_selected');
-
                 this.getCurrencyNames() 
                 this.getDataFromHost()
-                
-            })
+                })
         });
     }
 
@@ -45,13 +41,13 @@ class Converter  {
         this.valueCurrensyToSale.addEventListener('input', () => {
             this.valueCurrensyToSale.value
             this.getDataFromHost();
-            
+            this.leftIputSale = true;
         })
 
         this.valueCurrensyToBuy.addEventListener('input', () => {
             this.valueCurrensyToBuy.value
             this.getDataFromHost();
-            
+            this.leftIputSale = false;
         })
         // 3. При срабатывании создаем запрос на сервер, получаем ответ и рендерим информацию
         
@@ -77,6 +73,9 @@ class Converter  {
                 this.render();
             })
             .catch(error => {
+                
+                // messageError.textContent = 'Что-то пошло не так';
+                // alert(messageError);
                 console.log(error)
             }) 
     }
@@ -93,10 +92,11 @@ class Converter  {
         this.renderRatesInfo();
         let leftinput = document.querySelector('#leftinput')
         let rightinput = document.querySelector('#rightinput')
-        // rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
-        if (this.valueCurrensyToSale.value > this.valueCurrensyToBuy.value ) {
+        //  rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
+        let isPositive = this.leftIputSale ? 'true' : 'false';
+        if (isPositive) {
             rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
-        } else {
+        } else  {
             leftinput.value =(parseFloat(rightinput.value) / this.toSale).toFixed(2)
         }
 
