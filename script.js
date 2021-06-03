@@ -57,7 +57,7 @@ class Converter  {
     // Получаем данные о текущих выбраных валютах
     getCurrencyNames () {
         this.base = this.saleSelected.getAttribute('data-currency');
-        this.symbol = this.buySelected.getAttribute('data-currency');
+        //this.symbol = this.buySelected.getAttribute('data-currency');
     }
 
     //  Получить ответ и вернуть его
@@ -68,22 +68,21 @@ class Converter  {
             .then( data => {
                 this.toSale = data.rates[this.symbol]; 
                 this.toBuy = 1 / this.toSale
-                console.log(this.toSale)
-                console.log(this.toBuy)
+                console.log((this.toSale).toFixed(4))
+                console.log((this.toBuy).toFixed(4))
                 this.render();
             })
             .catch(error => {
-                
-                // messageError.textContent = 'Что-то пошло не так';
-                // alert(messageError);
+                let messageError = document.querySelector('.message-Error')
+                messageError.textContent = 'Что-то пошло не так';
                 console.log(error)
             }) 
     }
     
     // Вывод информации курса на страницу
     renderRatesInfo () {
-        this.saleInfo.textContent = `1 ${this.saleSelected.textContent} = ${this.toSale} ${this.buySelected.textContent}`;
-        this.buyInfo.textContent = `1 ${this.buySelected.textContent} = ${this.toBuy} ${this.saleSelected.textContent}`;
+        this.saleInfo.textContent = `1 ${this.saleSelected.textContent} = ${this.toSale.toFixed(4)} ${this.buySelected.textContent}`;
+        this.buyInfo.textContent = `1 ${this.buySelected.textContent} = ${this.toBuy.toFixed(4)} ${this.saleSelected.textContent}`;
         
     }
 
@@ -92,9 +91,7 @@ class Converter  {
         this.renderRatesInfo();
         let leftinput = document.querySelector('#leftinput')
         let rightinput = document.querySelector('#rightinput')
-        //  rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
-        let isPositive = this.leftIputSale ? 'true' : 'false';
-        if (isPositive) {
+        if (this.leftIputSale) {
             rightinput.value = (parseFloat(leftinput.value) * this.toSale).toFixed(2)
         } else  {
             leftinput.value =(parseFloat(rightinput.value) / this.toSale).toFixed(2)
