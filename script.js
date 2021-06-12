@@ -29,7 +29,7 @@ class Converter  {
                 this.buySelected.classList.add('buy_selected');
                 this.getCurrencyNames() 
                 this.getDataFromHost()
-                })
+                })  
         });
     }
 
@@ -51,13 +51,12 @@ class Converter  {
         })
         // 3. При срабатывании создаем запрос на сервер, получаем ответ и рендерим информацию
         
-
     }
 
     // Получаем данные о текущих выбраных валютах
     getCurrencyNames () {
         this.base = this.saleSelected.getAttribute('data-currency');
-        //this.symbol = this.buySelected.getAttribute('data-currency');
+        this.symbol = this.buySelected.getAttribute('data-currency');
     }
 
     //  Получить ответ и вернуть его
